@@ -23,7 +23,7 @@
      dest: "/home/{{ item }}/"
     loop: "{{ userslists }}"
 
-  - name: writing content
+  - name: writing user names README.md
     copy:
      dest:  "/home/{{ item }}/README.md"
      content: "Hello {{ item }}, welcome to ansible"
