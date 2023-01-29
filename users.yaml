@@ -1,0 +1,30 @@
+- hosts: dev01
+  become: true
+  vars:
+     userslists:
+      - testuser1
+      - testuser2
+      - testuser3
+      - testuser4
+      - testuser5
+
+  tasks:
+
+  - name: creating userslists using loop
+    user:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ userslists }}"
+
+
+  - name: copying content
+    copy:
+     src: README.md
+     dest: "/home/{{ item }}/"
+    loop: "{{ userslists }}"
+
+  - name: writing content
+    copy:
+     dest:  "/home/{{ item }}/README.md"
+     content: "Hello {{ item }}, welcome to ansible"
+    loop: "{{ userslists }}"
